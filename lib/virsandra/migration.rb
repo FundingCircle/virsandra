@@ -8,7 +8,6 @@ module Virsandra
     end
 
     def migrate_up
-      require_files
       migrate_files(:up)
     end
 
@@ -20,14 +19,9 @@ module Virsandra
       end
     end
 
-    def require_files
-      pending_migrations.each do |file_path|
-        ::Kernel.require(file_path)
-      end
-    end
-
     def migrate_files(direction)
       pending_migrations.each do |file_path|
+        ::Kernel.require(file_path)
         klass = file_path_to_klass(file_path)
         klass.new.send(direction)
         @migration_table.mark_as_migrated(version_from_path(file_path))
