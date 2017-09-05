@@ -8,7 +8,7 @@ module Virsandra
     ].freeze
 
     DEFAULT_OPTION_VALUES = {
-      servers: "127.0.0.1",
+      servers: "localhost",
       consistency: :quorum,
       credentials: {}
     }.freeze
