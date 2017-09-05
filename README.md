@@ -23,7 +23,7 @@ yourself.
 require 'virsandra'
 
 Virsandra.configure do |c|
-  c.servers = "127.0.0.1"
+  c.servers = ENV.fetch('CASSANDRA_HOST')
   c.keyspace = "example_keyspace"
 end
 ````

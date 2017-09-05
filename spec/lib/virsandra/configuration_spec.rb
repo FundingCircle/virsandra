@@ -4,7 +4,7 @@ describe Virsandra::Configuration do
   subject(:config){ described_class.new(given_options) }
   let(:given_options){ {} }
 
-  its(:servers){ should eq("127.0.0.1") }
+  its(:servers){ should eq("localhost") }
   its(:consistency){ should eq(:quorum) }
   its(:keyspace){ should be_nil }
 
@@ -44,7 +44,7 @@ describe Virsandra::Configuration do
       config.to_hash.should eq({
         consistency: :quorum,
         keyspace: nil,
-        servers: "127.0.0.1",
+        servers: "localhost",
         credentials: {username: '', password: ''}
       })
     end
