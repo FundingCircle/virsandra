@@ -4,6 +4,7 @@ module Virsandra
       @file_paths = sort_file_paths(file_paths)
       @options = options
       @migration_table = Virsandra::Migrations::Table.new(@options[:keyspace])
+      @existing_versions = @migration_table.versions
     end
 
     def migrate_up
@@ -35,7 +36,7 @@ module Virsandra
 
     def pending_migrations
       filtered_paths.reject do |path|
-        @migration_table.versions.any? do |version|
+        @existing_versions.any? do |version|
           path.match(version_regexp(version))
         end
       end
